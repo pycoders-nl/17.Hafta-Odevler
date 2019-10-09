@@ -83,8 +83,3 @@ print('The population of The World =',im.fetchone()[0])
 
 
 
-
-#
-# print(*list(*im.execute("""SELECT MAX(id) AS id from gorevler """)))
-# im.execute("""SELECT count(id) from gorevler WHERE durumId=3""")
-# print(im.fetchall()[0][0])
