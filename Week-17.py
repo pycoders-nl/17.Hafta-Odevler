@@ -67,7 +67,8 @@ print(cur.fetchall())
 
 print("\n\n---»  Q8) Avrupa’nin (Europe) en kalabalik sehri hangisidir?\n")
 
-cur.execute("Select name, MAX (population) from country where continent='Europe'")
+cur.execute("SELECT city.Name, MAX(city.population) FROM city INNER JOIN country ON city.CountryCode=country.Code " 
+            "WHERE country.continent='Europe'")
 print(cur.fetchall())
 
 #---------------------------------------------------------------------------------------------------
@@ -104,11 +105,3 @@ print("\n\n---»  Q13) Dunyanin nufusunu hesaplayiniz.\n")
 
 cur.execute("Select SUM (population) from country")
 print(cur.fetchall())
-
-#---------------------------------------------------------------------------------------------------
-
-
-
-
-
-
