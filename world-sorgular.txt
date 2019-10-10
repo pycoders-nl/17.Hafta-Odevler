@@ -1,0 +1,69 @@
+import sqlite3
+
+vt=sqlite3.connect(r"C:\Users\hkn\Desktop\Odevler\17.Hafta-Odevler\world.db")
+im=vt.cursor()
+
+# 1- Nufusu 100 milyonun uzerinde olan ulkeler hangileridir?
+sorgu1 = "SELECT population,name From country WHERE  population>100000000"
+im.execute(sorgu1)
+print(im.fetchall())
+
+# 2- Isminin sonunda “land” kelimesi gecen ulkeler hangileridir?
+sorgu2 = "SELECT name From country WHERE name like '%land'"
+im.execute(sorgu2)
+print(im.fetchall())
+
+# 3- 500 bin ile 1 milyon arasinda nufusu olan sehirler hangileridir?
+sorgu3 = "SELECT population,name  From city WHERE  population between '500000' and '1000000'"
+im.execute(sorgu3)
+print(im.fetchall())
+
+#4- Avrupa (“Europe”) kitasinda bulunan ulkelerin tamamini bulunuz.
+sorgu4 = "SELECT name  From country WHERE  Continent='Europe'"
+im.execute(sorgu4)
+print(im.fetchall())
+
+# 5- Tum ulkeleri yuzolcumleri buyukten kucuge olacak sekilde siralayaniz.
+sorgu5 = 'SELECT name, SurfaceArea FROM country order by SurfaceArea desc'# sonuna asc yazarsak kucukten buyuge siralar
+im.execute(sorgu5)
+print(im.fetchall())
+
+# 6- Hollanda’nin (Netherlands) tum sehirlerini bulunuz.
+sorgu6="SELECT name FROM city WHERE CountryCode ='NLD'"
+im.execute(sorgu6)
+print(im.fetchall())
+
+# 7- Amsterdam’in nufusu kactir?
+sorgu7="SELECT population FROM city WHERE name ='Amsterdam'"
+im.execute(sorgu7)
+print(im.fetchall())
+
+# 8- Avrupa’nin (Europe) en kalabalik sehri hangisidir?
+sorgu8='SELECT city.Population,city.name FROM country,city where country.code=city.CountryCode and country.Continent="Europe" order by city.Population desc LIMIT 1'
+im.execute(sorgu8)
+print(im.fetchall())
+
+# 9- Afrika kitasinin (Africa) yuzolcumu en buyuk ulkesi hangisidir?
+sorgu9='SELECT SurfaceArea,name FROM country where Continent="Africa" order by SurfaceArea desc LIMIT 1'
+im.execute(sorgu9)
+print(im.fetchall())
+
+# 10- Asya (Asia) kitasinda yuzolcumune gore en buyuk 10 ulke hangileridir?
+sorgu10='SELECT SurfaceArea,name FROM country where Continent="Asia" order by SurfaceArea desc LIMIT 10'
+im.execute(sorgu10)
+print(im.fetchall())
+
+# 11- Yuzolcumu en kucuk olan ulkeyi bulunuz.
+sorgu11='SELECT SurfaceArea,name FROM country order by SurfaceArea asc LIMIT 1'
+im.execute(sorgu11)
+print(im.fetchall())
+
+# 12- En kalabalik 10 sehri bulunuz.
+sorgu12='SELECT Population,name FROM city order by population desc LIMIT 10'
+im.execute(sorgu12)
+print(im.fetchall())
+
+# 13- Dunyanin nufusunu hesaplayiniz.
+sorgu13='SELECT SUM(Population)as "Toplam Nufus" FROM country'
+im.execute(sorgu13)
+print(im.fetchall())
