@@ -25,9 +25,13 @@ def DB_connector():
     cur.execute("SELECT Population FROM city WHERE Name == 'Amsterdam'")
     print("\n7- Amsterdam’in nufusu kactir?\n", cur.fetchall())
 
-    cur.execute("SELECT city.Name, max(city.Population) FROM city "
+    cur.execute("SELECT city.Name, max(city.Population) AS Max_City_Population FROM city "
                 "INNER JOIN country on city.CountryCode = country.Code "
                 "WHERE Continent == 'Europe'")
+    #  Alternative query to Question 8, giving the same result
+    # cur.execute("SELECT city.Name, max(city.Population) AS Max_City_Population FROM city, country "
+    #             "WHERE city.CountryCode = country.Code "
+    #             "AND country.Continent = 'Europe'")
     print("\n8- Avrupa’nin (Europe) en kalabalik sehri hangisidir?\n", cur.fetchall())
 
     cur.execute("SELECT Name, max(Population) FROM country WHERE Continent = 'Africa'")
@@ -45,6 +49,7 @@ def DB_connector():
     cur.execute("SELECT sum(Population) FROM country")
     print("\n13- Dunyanin nufusunu hesaplayiniz.\n", cur.fetchall())
 
+    conn.close()
 
 
 DB_connector()
